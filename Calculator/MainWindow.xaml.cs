@@ -158,13 +158,13 @@ namespace Calculator
         public MainWindow()
         {
             InitializeComponent();
-
             foreach(UIElement elements in MainRoot.Children)  //Обраточик событий только для кнопок с цифрами !
             {
                 if (elements is Button)
                 {
                     //преобразование elements к классу Button и вызов функции
                     ((Button) elements).Click += Button_Click;
+                    //таттататата   
                 }
             }
         }

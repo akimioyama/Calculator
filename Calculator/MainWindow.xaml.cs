@@ -23,21 +23,150 @@ namespace Calculator
     {
         private void Solution(string mbsrt) // =
         {
+            // ∞
             string value = new DataTable().Compute(mbsrt, null).ToString();
-            TextBlock.Text = value;
+            //value = value.Replace(',', '.');
+
+            char ch = ',';
+
+            if (value.IndexOf(ch) != -1)
+            {
+                double new_value;
+                new_value = Convert.ToDouble(value);
+                new_value = Math.Round(new_value, 5);
+                value = new_value.ToString();
+                value = value.Replace(',', '.');
+                TextBlock.Text = value;
+            }
+            else
+            {
+                TextBlock.Text = value;
+            }
         }
-        private void Button_Click_On_Plus(object sender, RoutedEventArgs e) //+
+        private void Button_Click_Solution(object sender, RoutedEventArgs e)  // =
         {
+            string zero2 = "Деление на 0 невозможно";
+            string new_new_ch = "∞";
+            if (TextBlock.Text == zero2 || TextBlock.Text == new_new_ch)
+            {
+                AllStr.Text = "";
+                TextBlock.Text = "";
+            }
+            char ch = '=';
+            string zero = "/0";
+            int len = AllStr.Text.Length;
+            if (TextBlock.Text == "")
+            {
+                TextBlock.Text = "";
+            }
+            else if (AllStr.Text != "" && TextBlock.Text != "" && AllStr.Text[len - 1] != ch)
+            {
+                string ss = AllStr.Text + TextBlock.Text;
+                if (ss.IndexOf(zero) == -1)
+                {
+                    AllStr.Text = ss + "=";
+                    Solution(ss);
+                }
+                else
+                {
+                    TextBlock.Text = "Деление на 0 невозможно";
+                }
+            }
+            else
+            {
+                AllStr.Text = "";
+            }
+        }
+        private void Button_Click_On_Multiplication(object sender, RoutedEventArgs e) // *
+        {
+            string zero = "Деление на 0 невозможно";
             char ch = '.';
+            char new_ch = '=';
+            int len = TextBlock.Text.Length;
+            string new_new_ch = "∞";
+            string secont_str;
+            if (TextBlock.Text == zero || TextBlock.Text == new_new_ch)
+            {
+                AllStr.Text = "";
+                TextBlock.Text = "";
+            }
+            if (TextBlock.Text != "")
+            {
+                if (ch != TextBlock.Text[len - 1] && AllStr.Text.IndexOf(new_ch) == -1)
+                {
+                    secont_str = TextBlock.Text;
+                    AllStr.Text += secont_str + "*";
+                    TextBlock.Text = "";
+                }
+                else if (ch != TextBlock.Text[len - 1] && AllStr.Text.IndexOf(new_ch) != -1)
+                {
+                    AllStr.Text = TextBlock.Text + "*";
+                    TextBlock.Text = "";
+                }
+            }
+            else
+            {
+                TextBlock.Text = "";
+            }
+        }
+        private void Button_Click_On_Division(object sender, RoutedEventArgs e) // Деление /
+        {
+            string zero = "Деление на 0 невозможно";
+            string new_new_ch = "∞";
+            if (TextBlock.Text == zero || TextBlock.Text == new_new_ch)
+            {
+                AllStr.Text = "";
+                TextBlock.Text = "";
+            }
+            char ch = '.';
+            char new_ch = '=';
             int len = TextBlock.Text.Length;
 
             string secont_str;
             if (TextBlock.Text != "")
             {
-                if (ch != TextBlock.Text[len - 1])
+                if (ch != TextBlock.Text[len - 1] && AllStr.Text.IndexOf(new_ch) == -1)
+                {
+                    secont_str = TextBlock.Text;
+                    AllStr.Text += secont_str + "/";
+                    TextBlock.Text = "";
+                }
+                else if (ch != TextBlock.Text[len - 1] && AllStr.Text.IndexOf(new_ch) != -1)
+                {
+                    AllStr.Text = TextBlock.Text + "/";
+                    TextBlock.Text = "";
+                }
+            }
+            else
+            {
+                TextBlock.Text = "";
+            }
+        }
+        private void Button_Click_On_Plus(object sender, RoutedEventArgs e) //+
+        {
+            string new_new_ch = "∞";
+            string zero = "Деление на 0 невозможно";
+            if (TextBlock.Text == zero || TextBlock.Text == new_new_ch)
+            {
+                AllStr.Text = "";
+                TextBlock.Text = "";
+            }
+            char ch = '.';
+            char new_ch = '=';
+            int len = TextBlock.Text.Length;
+
+            string secont_str;
+            if (TextBlock.Text != "")
+            {
+                if (ch != TextBlock.Text[len - 1] && AllStr.Text.IndexOf(new_ch) == -1)
                 {
                     secont_str = TextBlock.Text;
                     AllStr.Text += secont_str + "+";
+                    TextBlock.Text = "";
+                }
+                else if (ch != TextBlock.Text[len - 1] && AllStr.Text.IndexOf(new_ch) != -1)
+                {
+                    AllStr.Text = TextBlock.Text + "+";
                     TextBlock.Text = "";
                 }
             }
@@ -48,15 +177,28 @@ namespace Calculator
         }
         private void Button_Click_On_Minus(object sender, RoutedEventArgs e) // -
         {
+            string zero = "Деление на 0 невозможно";
+            string new_new_ch = "∞";
+            if (TextBlock.Text == zero || TextBlock.Text == new_new_ch)
+            {
+                AllStr.Text = "";
+                TextBlock.Text = "";
+            }
             char ch = '.';
+            char new_ch = '=';
             int len = TextBlock.Text.Length;
             string secont_str;
             if (TextBlock.Text != "")
             {
-                if (ch != TextBlock.Text[len - 1])
+                if (ch != TextBlock.Text[len - 1] && AllStr.Text.IndexOf(new_ch) == -1)
                 {
                     secont_str = TextBlock.Text;
                     AllStr.Text += secont_str + "-";
+                    TextBlock.Text = "";
+                }
+                else if (ch != TextBlock.Text[len - 1] && AllStr.Text.IndexOf(new_ch) != -1)
+                {
+                    AllStr.Text = TextBlock.Text + "-";
                     TextBlock.Text = "";
                 }
             }
@@ -72,6 +214,13 @@ namespace Calculator
         }
         private void Button_Click_On_Comma(object sender, RoutedEventArgs e) // ,
         {
+            string zero = "Деление на 0 невозможно";
+            string new_new_ch = "∞";
+            if (TextBlock.Text == zero || TextBlock.Text == new_new_ch)
+            {
+                AllStr.Text = "";
+                TextBlock.Text = "";
+            }
             char ch = '.';
             int len = TextBlock.Text.Length;
             int count = 0;
@@ -83,18 +232,30 @@ namespace Calculator
                 }
             }
 
-            if (TextBlock.Text[len - 1] != ch && count == 0)
+            if (TextBlock.Text != "")
             {
-                TextBlock.Text = TextBlock.Text + ch;
+                if (TextBlock.Text[len - 1] != ch && count == 0)
+                {
+                    TextBlock.Text = TextBlock.Text + ch;
+                }
+                else
+                {
+                    TextBlock.Text = TextBlock.Text;
+                }
             }
             else
             {
-                TextBlock.Text = TextBlock.Text;
+                TextBlock.Text = "";
             }
-            
         }
         private void Button_Click_On_DEL(object sender, RoutedEventArgs e) // DEL
         {
+            string zero = "Деление на 0 невозможно";
+            if (TextBlock.Text == zero)
+            {
+                AllStr.Text = "";
+                TextBlock.Text = "";
+            }
             string str = TextBlock.Text;
             int len = str.Length;
             string new_str;
@@ -108,48 +269,313 @@ namespace Calculator
             }
             TextBlock.Text = new_str;
         }
+        private void Button_Click_On_Plus_Minus(object sender, RoutedEventArgs e) // +/-
+        {
+            string zero = "Деление на 0 невозможно";
+            if (TextBlock.Text == zero)
+            {
+                AllStr.Text = "";
+                TextBlock.Text = "";
+            }
+            if (TextBlock.Text != "")
+            {
+                string asd = TextBlock.Text;
+                asd = asd.Replace('.',',');
+                double qwe = Double.Parse(asd);
+                qwe = qwe * -1;
+                string zxc = qwe.ToString();
+                zxc = zxc.Replace(',', '.');
+                TextBlock.Text = zxc;
+
+            }
+            else
+            {
+                TextBlock.Text = TextBlock.Text;
+            }
+        }
+        private double Pow(double x)
+        {
+            return Math.Pow(x, 2);
+        }
+        private void Button_Click_On_Power(object sender, RoutedEventArgs e) // x^2
+        {
+            string zero = "Деление на 0 невозможно";
+            if (TextBlock.Text == zero)
+            {
+                AllStr.Text = "";
+                TextBlock.Text = "";
+            }
+            if (TextBlock.Text != "")
+            {
+                string asd = TextBlock.Text;
+                asd = asd.Replace('.', ',');
+                double for_pow = Double.Parse(asd);
+                double for_new_pow = Pow(for_pow);
+                string zxc = for_new_pow.ToString();
+                zxc = zxc.Replace(',', '.');
+                TextBlock.Text = zxc;
+            }
+        }
+        private double Sqrt(double x)
+        {
+            return Math.Sqrt(x);
+        }
+        private void Button_Click_On_Sqrt(object sender, RoutedEventArgs e) // sqrt
+        {
+            string zero = "Деление на 0 невозможно";
+            if (TextBlock.Text == zero)
+            {
+                AllStr.Text = "";
+                TextBlock.Text = "";
+            }
+            if (TextBlock.Text != "")
+            {
+                string asd = TextBlock.Text;
+                asd = asd.Replace('.', ',');
+                double for_Sqrt = Double.Parse(asd);
+                double for_new_Sqrt = Sqrt(for_Sqrt);
+                string zxc = for_new_Sqrt.ToString();
+                zxc = zxc.Replace(',', '.');
+                TextBlock.Text = zxc;
+            }
+        }
+        private void Button_Click_On_1_Obr(object sender, RoutedEventArgs e) // 1/x
+        {
+            string zero = "Деление на 0 невозможно";
+            if (TextBlock.Text == zero)
+            {
+                AllStr.Text = "";
+                TextBlock.Text = "";
+            }
+            if (TextBlock.Text != "")
+            {
+                string asd = TextBlock.Text;
+                asd = asd.Replace('.', ',');
+                double uuu = Double.Parse(asd);
+                uuu = 1 / uuu;
+                string zxc = uuu.ToString();
+                zxc = zxc.Replace(',', '.');
+                TextBlock.Text = zxc;
+            }
+        }
         private void Button_Click(object sender, RoutedEventArgs e) //параметры при обратоке нажатия
         {
             string str = (string)((Button) e.OriginalSource).Content; // в строку присваеваем значение нашей копки (е - обект класса RoutedEventArgs, потом преобразуем его
             // к классу кнопки. OriginalSource - берём сам этот обект и Content - возращаем его содержимое)
-
+            string zero = "Деление на 0 невозможно";
             switch (str) 
             {
+
                 case "1":
-                    TextBlock.Text += str;
-                    break;
+                    if (TextBlock.Text == zero)
+                    {
+                        AllStr.Text = "";
+                        TextBlock.Text = "";
+                    }
+                    if (TextBlock.Text.Length == 0)
+                    {
+                        TextBlock.Text += str;
+                        break;
+                    }
+                    else if (TextBlock.Text[0] == '0' && TextBlock.Text.Length < 2)
+                    {
+                        TextBlock.Text = TextBlock.Text;
+                        break;
+                    }
+                    else
+                    {
+                        TextBlock.Text += str;
+                        break;
+                    }
                 case "2":
-                    TextBlock.Text += str;
-                    break;
+                    if (TextBlock.Text == zero)
+                    {
+                        AllStr.Text = "";
+                        TextBlock.Text = "";
+                    }
+                    if (TextBlock.Text.Length == 0)
+                    {
+                        TextBlock.Text += str;
+                        break;
+                    }
+                    else if (TextBlock.Text[0] == '0' && TextBlock.Text.Length < 2)
+                    {
+                        TextBlock.Text = TextBlock.Text;
+                        break;
+                    }
+                    else
+                    {
+                        TextBlock.Text += str;
+                        break;
+                    }
                 case "3":
-                    TextBlock.Text += str;
-                    break;
+                    if (TextBlock.Text == zero)
+                    {
+                        AllStr.Text = "";
+                        TextBlock.Text = "";
+                    }
+                    if (TextBlock.Text.Length == 0)
+                    {
+                        TextBlock.Text += str;
+                        break;
+                    }
+                    else if (TextBlock.Text[0] == '0' && TextBlock.Text.Length < 2)
+                    {
+                        TextBlock.Text = TextBlock.Text;
+                        break;
+                    }
+                    else
+                    {
+                        TextBlock.Text += str;
+                        break;
+                    }
                 case "4":
-                    TextBlock.Text += str;
-                    break;
+                    if (TextBlock.Text == zero)
+                    {
+                        AllStr.Text = "";
+                        TextBlock.Text = "";
+                    }
+                    if (TextBlock.Text.Length == 0)
+                    {
+                        TextBlock.Text += str;
+                        break;
+                    }
+                    else if (TextBlock.Text[0] == '0' && TextBlock.Text.Length < 2)
+                    {
+                        TextBlock.Text = TextBlock.Text;
+                        break;
+                    }
+                    else
+                    {
+                        TextBlock.Text += str;
+                        break;
+                    }
                 case "5":
-                    TextBlock.Text += str;
-                    break;
+                    if (TextBlock.Text == zero)
+                    {
+                        AllStr.Text = "";
+                        TextBlock.Text = "";
+                    }
+                    if (TextBlock.Text.Length == 0)
+                    {
+                        TextBlock.Text += str;
+                        break;
+                    }
+                    else if (TextBlock.Text[0] == '0' && TextBlock.Text.Length < 2)
+                    {
+                        TextBlock.Text = TextBlock.Text;
+                        break;
+                    }
+                    else
+                    {
+                        TextBlock.Text += str;
+                        break;
+                    }
                 case "6":
-                    TextBlock.Text += str;
-                    break;
+                    if (TextBlock.Text == zero)
+                    {
+                        AllStr.Text = "";
+                        TextBlock.Text = "";
+                    }
+                    if (TextBlock.Text.Length == 0)
+                    {
+                        TextBlock.Text += str;
+                        break;
+                    }
+                    else if (TextBlock.Text[0] == '0' && TextBlock.Text.Length < 2)
+                    {
+                        TextBlock.Text = TextBlock.Text;
+                        break;
+                    }
+                    else
+                    {
+                        TextBlock.Text += str;
+                        break;
+                    }
                 case "7":
-                    TextBlock.Text += str;
-                    break;
+                    if (TextBlock.Text == zero)
+                    {
+                        AllStr.Text = "";
+                        TextBlock.Text = "";
+                    }
+                    if (TextBlock.Text.Length == 0)
+                    {
+                        TextBlock.Text += str;
+                        break;
+                    }
+                    else if (TextBlock.Text[0] == '0' && TextBlock.Text.Length < 2)
+                    {
+                        TextBlock.Text = TextBlock.Text;
+                        break;
+                    }
+                    else
+                    {
+                        TextBlock.Text += str;
+                        break;
+                    }
                 case "8":
-                    TextBlock.Text += str;
-                    break;
+                    if (TextBlock.Text == zero)
+                    {
+                        AllStr.Text = "";
+                        TextBlock.Text = "";
+                    }
+                    if (TextBlock.Text.Length == 0)
+                    {
+                        TextBlock.Text += str;
+                        break;
+                    }
+                    else if (TextBlock.Text[0] == '0' && TextBlock.Text.Length < 2)
+                    {
+                        TextBlock.Text = TextBlock.Text;
+                        break;
+                    }
+                    else
+                    {
+                        TextBlock.Text += str;
+                        break;
+                    }
                 case "9":
-                    TextBlock.Text += str;
-                    break;
+                    if (TextBlock.Text == zero)
+                    {
+                        AllStr.Text = "";
+                        TextBlock.Text = "";
+                    }
+                    if (TextBlock.Text.Length == 0)
+                    {
+                        TextBlock.Text += str;
+                        break;
+                    }
+                    else if (TextBlock.Text[0] == '0' && TextBlock.Text.Length < 2)
+                    {
+                        TextBlock.Text = TextBlock.Text;
+                        break;
+                    }
+                    else
+                    {
+                        TextBlock.Text += str;
+                        break;
+                    }
                 case "0":
-                    TextBlock.Text += str;
-                    break;
-                case "=":
-                    string ss = AllStr.Text + TextBlock.Text;
-                    AllStr.Text = ss + "=";
-                    Solution(ss);
-                    break;
+                    if (TextBlock.Text == zero)
+                    {
+                        AllStr.Text = "";
+                        TextBlock.Text = "";
+                    }
+                    if (TextBlock.Text.Length == 0)
+                    {
+                        TextBlock.Text += str;
+                        break;
+                    }
+                    else if (TextBlock.Text[0] == '0' && TextBlock.Text.Length < 2)
+                    {
+                        TextBlock.Text = TextBlock.Text;
+                        break;
+                    }
+                    else
+                    {
+                        TextBlock.Text += str;
+                        break;
+                    }
             }
 
         }
@@ -164,7 +590,6 @@ namespace Calculator
                 {
                     //преобразование elements к классу Button и вызов функции
                     ((Button) elements).Click += Button_Click;
-                    //таттататата   
                 }
             }
         }

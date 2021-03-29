@@ -47,7 +47,9 @@ namespace Calculator
         {
             string zero2 = "Деление на 0 невозможно";
             string new_new_ch = "∞";
-            if (TextBlock.Text == zero2 || TextBlock.Text == new_new_ch)
+            //string new_new_new_string2 = "NaN";
+            string error = "Не число";
+            if (TextBlock.Text == zero2 || TextBlock.Text == error || TextBlock.Text == new_new_ch)
             {
                 AllStr.Text = "";
                 TextBlock.Text = "";
@@ -85,7 +87,8 @@ namespace Calculator
             int len = TextBlock.Text.Length;
             string new_new_ch = "∞";
             string secont_str;
-            if (TextBlock.Text == zero || TextBlock.Text == new_new_ch)
+            string error = "Не число";
+            if (TextBlock.Text == zero || TextBlock.Text == error || TextBlock.Text == new_new_ch)
             {
                 AllStr.Text = "";
                 TextBlock.Text = "";
@@ -111,9 +114,10 @@ namespace Calculator
         }
         private void Button_Click_On_Division(object sender, RoutedEventArgs e) // Деление /
         {
-            string zero = "Деление на 0 невозможно";
             string new_new_ch = "∞";
-            if (TextBlock.Text == zero || TextBlock.Text == new_new_ch)
+            string zero = "Деление на 0 невозможно";
+            string error = "Не число";
+            if (TextBlock.Text == zero || TextBlock.Text == error || TextBlock.Text == new_new_ch)
             {
                 AllStr.Text = "";
                 TextBlock.Text = "";
@@ -146,7 +150,8 @@ namespace Calculator
         {
             string new_new_ch = "∞";
             string zero = "Деление на 0 невозможно";
-            if (TextBlock.Text == zero || TextBlock.Text == new_new_ch)
+            string error = "Не число";
+            if (TextBlock.Text == zero || TextBlock.Text == error)
             {
                 AllStr.Text = "";
                 TextBlock.Text = "";
@@ -178,8 +183,8 @@ namespace Calculator
         private void Button_Click_On_Minus(object sender, RoutedEventArgs e) // -
         {
             string zero = "Деление на 0 невозможно";
-            string new_new_ch = "∞";
-            if (TextBlock.Text == zero || TextBlock.Text == new_new_ch)
+            string error = "Не число";
+            if (TextBlock.Text == zero || TextBlock.Text == error)
             {
                 AllStr.Text = "";
                 TextBlock.Text = "";
@@ -214,13 +219,15 @@ namespace Calculator
         }
         private void Button_Click_On_Comma(object sender, RoutedEventArgs e) // ,
         {
-            string zero = "Деление на 0 невозможно";
             string new_new_ch = "∞";
-            if (TextBlock.Text == zero || TextBlock.Text == new_new_ch)
+            string zero = "Деление на 0 невозможно";
+            string error = "Не число";
+            if (TextBlock.Text == zero || TextBlock.Text == error)
             {
                 AllStr.Text = "";
                 TextBlock.Text = "";
             }
+
             char ch = '.';
             int len = TextBlock.Text.Length;
             int count = 0;
@@ -251,7 +258,8 @@ namespace Calculator
         private void Button_Click_On_DEL(object sender, RoutedEventArgs e) // DEL
         {
             string zero = "Деление на 0 невозможно";
-            if (TextBlock.Text == zero)
+            string error = "Не число";
+            if (TextBlock.Text == zero || TextBlock.Text == error)
             {
                 AllStr.Text = "";
                 TextBlock.Text = "";
@@ -272,7 +280,8 @@ namespace Calculator
         private void Button_Click_On_Plus_Minus(object sender, RoutedEventArgs e) // +/-
         {
             string zero = "Деление на 0 невозможно";
-            if (TextBlock.Text == zero)
+            string error = "Не число";
+            if (TextBlock.Text == zero || TextBlock.Text == error)
             {
                 AllStr.Text = "";
                 TextBlock.Text = "";
@@ -300,7 +309,8 @@ namespace Calculator
         private void Button_Click_On_Power(object sender, RoutedEventArgs e) // x^2
         {
             string zero = "Деление на 0 невозможно";
-            if (TextBlock.Text == zero)
+            string error = "Не число";
+            if (TextBlock.Text == zero || TextBlock.Text == error)
             {
                 AllStr.Text = "";
                 TextBlock.Text = "";
@@ -323,51 +333,69 @@ namespace Calculator
         private void Button_Click_On_Sqrt(object sender, RoutedEventArgs e) // sqrt
         {
             string zero = "Деление на 0 невозможно";
-            if (TextBlock.Text == zero)
+            string error = "Не число";
+            if (TextBlock.Text == zero || TextBlock.Text == error)
             {
                 AllStr.Text = "";
                 TextBlock.Text = "";
             }
             if (TextBlock.Text != "")
             {
-                string asd = TextBlock.Text;
-                asd = asd.Replace('.', ',');
-                double for_Sqrt = Double.Parse(asd);
-                double for_new_Sqrt = Sqrt(for_Sqrt);
-                string zxc = for_new_Sqrt.ToString();
-                zxc = zxc.Replace(',', '.');
-                TextBlock.Text = zxc;
+                if (TextBlock.Text[0] != '-')
+                {
+                    string asd = TextBlock.Text;
+                    asd = asd.Replace('.', ',');
+                    double for_Sqrt = Double.Parse(asd);
+                    double for_new_Sqrt = Sqrt(for_Sqrt);
+                    string zxc = for_new_Sqrt.ToString();
+                    zxc = zxc.Replace(',', '.');
+                    TextBlock.Text = zxc;
+                }
+                else
+                {
+                    TextBlock.Text = error;
+                }
             }
+
         }
         private void Button_Click_On_1_Obr(object sender, RoutedEventArgs e) // 1/x
         {
             string zero = "Деление на 0 невозможно";
-            if (TextBlock.Text == zero)
-            {
-                AllStr.Text = "";
-                TextBlock.Text = "";
-            }
+            string error = "Не число";
             if (TextBlock.Text != "")
             {
-                string asd = TextBlock.Text;
-                asd = asd.Replace('.', ',');
-                double uuu = Double.Parse(asd);
-                uuu = 1 / uuu;
-                string zxc = uuu.ToString();
-                zxc = zxc.Replace(',', '.');
-                TextBlock.Text = zxc;
+                if (TextBlock.Text == zero || TextBlock.Text == error)
+                {
+                    AllStr.Text = "";
+                    TextBlock.Text = "";
+                }
+                else if (TextBlock.Text == "0")
+                {
+                    TextBlock.Text = zero;
+                }
+                else
+                {
+                    string asd = TextBlock.Text;
+                    asd = asd.Replace('.', ',');
+                    double uuu = Double.Parse(asd);
+                    uuu = 1 / uuu;
+                    string zxc = uuu.ToString();
+                    zxc = zxc.Replace(',', '.');
+                    TextBlock.Text = zxc;
+                }
             }
         }
         private void Button_Click(object sender, RoutedEventArgs e) //параметры при обратоке нажатия
         {
             string str = (string)((Button) e.OriginalSource).Content; // в строку присваеваем значение нашей копки (е - обект класса RoutedEventArgs, потом преобразуем его
-            // к классу кнопки. OriginalSource - берём сам этот обект и Content - возращаем его содержимое)
+                                                                      // к классу кнопки. OriginalSource - берём сам этот обект и Content - возращаем его содержимое)
             string zero = "Деление на 0 невозможно";
+            string error = "Не число";
             switch (str) 
             {
 
                 case "1":
-                    if (TextBlock.Text == zero)
+                    if (TextBlock.Text == zero || TextBlock.Text == error)
                     {
                         AllStr.Text = "";
                         TextBlock.Text = "";
@@ -388,7 +416,7 @@ namespace Calculator
                         break;
                     }
                 case "2":
-                    if (TextBlock.Text == zero)
+                    if (TextBlock.Text == zero || TextBlock.Text == error)
                     {
                         AllStr.Text = "";
                         TextBlock.Text = "";
@@ -409,7 +437,7 @@ namespace Calculator
                         break;
                     }
                 case "3":
-                    if (TextBlock.Text == zero)
+                    if (TextBlock.Text == zero || TextBlock.Text == error)
                     {
                         AllStr.Text = "";
                         TextBlock.Text = "";
@@ -430,7 +458,7 @@ namespace Calculator
                         break;
                     }
                 case "4":
-                    if (TextBlock.Text == zero)
+                    if (TextBlock.Text == zero || TextBlock.Text == error)
                     {
                         AllStr.Text = "";
                         TextBlock.Text = "";
@@ -451,7 +479,7 @@ namespace Calculator
                         break;
                     }
                 case "5":
-                    if (TextBlock.Text == zero)
+                    if (TextBlock.Text == zero || TextBlock.Text == error)
                     {
                         AllStr.Text = "";
                         TextBlock.Text = "";
@@ -472,7 +500,7 @@ namespace Calculator
                         break;
                     }
                 case "6":
-                    if (TextBlock.Text == zero)
+                    if (TextBlock.Text == zero || TextBlock.Text == error)
                     {
                         AllStr.Text = "";
                         TextBlock.Text = "";
@@ -493,7 +521,7 @@ namespace Calculator
                         break;
                     }
                 case "7":
-                    if (TextBlock.Text == zero)
+                    if (TextBlock.Text == zero || TextBlock.Text == error)
                     {
                         AllStr.Text = "";
                         TextBlock.Text = "";
@@ -514,7 +542,7 @@ namespace Calculator
                         break;
                     }
                 case "8":
-                    if (TextBlock.Text == zero)
+                    if (TextBlock.Text == zero || TextBlock.Text == error)
                     {
                         AllStr.Text = "";
                         TextBlock.Text = "";
@@ -535,7 +563,7 @@ namespace Calculator
                         break;
                     }
                 case "9":
-                    if (TextBlock.Text == zero)
+                    if (TextBlock.Text == zero || TextBlock.Text == error)
                     {
                         AllStr.Text = "";
                         TextBlock.Text = "";
@@ -556,7 +584,7 @@ namespace Calculator
                         break;
                     }
                 case "0":
-                    if (TextBlock.Text == zero)
+                    if (TextBlock.Text == zero || TextBlock.Text == error)
                     {
                         AllStr.Text = "";
                         TextBlock.Text = "";

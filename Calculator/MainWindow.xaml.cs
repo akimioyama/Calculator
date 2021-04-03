@@ -24,14 +24,14 @@ namespace Calculator
         private void Solution(string mbsrt) // =
         {
             // ∞
-            string value = new DataTable().Compute(mbsrt, null).ToString();
+            string value = new DataTable().Compute(mbsrt, null).ToString(); // полчуаем строку, которая начинает вычисляться, а посел преобразуем её в новую строку
             //value = value.Replace(',', '.');
 
             char ch = ',';
 
             if (value.IndexOf(ch) != -1)
             {
-                double new_value;
+                double new_value;                       // проверяем есть ли в ответе запетая, так как лучше работать с точкой
                 new_value = Convert.ToDouble(value);
                 new_value = Math.Round(new_value, 5);
                 value = new_value.ToString();
@@ -49,7 +49,7 @@ namespace Calculator
             string new_new_ch = "∞";
             //string new_new_new_string2 = "NaN";
             string error = "Не число";
-            if (TextBlock.Text == zero2 || TextBlock.Text == error || TextBlock.Text == new_new_ch)
+            if (TextBlock.Text == zero2 || TextBlock.Text == error || TextBlock.Text == new_new_ch) // проверка на слова в TextBlock.Text
             {
                 AllStr.Text = "";
                 TextBlock.Text = "";
@@ -57,14 +57,14 @@ namespace Calculator
             char ch = '=';
             string zero = "/0";
             int len = AllStr.Text.Length;
-            if (TextBlock.Text == "")
+            if (TextBlock.Text == "") // если пусто, то ничего не делаем
             {
                 TextBlock.Text = "";
             }
-            else if (AllStr.Text != "" && TextBlock.Text != "" && AllStr.Text[len - 1] != ch)
+            else if (AllStr.Text != "" && TextBlock.Text != "" && AllStr.Text[len - 1] != ch) // провераем на всё нужное для вычелсения ответа
             {
                 string ss = AllStr.Text + TextBlock.Text;
-                if (ss.IndexOf(zero) == -1)
+                if (ss.IndexOf(zero) == -1) // не разрешаем делить на 0
                 {
                     AllStr.Text = ss + "=";
                     Solution(ss);
@@ -88,20 +88,20 @@ namespace Calculator
             string new_new_ch = "∞";
             string secont_str;
             string error = "Не число";
-            if (TextBlock.Text == zero || TextBlock.Text == error || TextBlock.Text == new_new_ch)
+            if (TextBlock.Text == zero || TextBlock.Text == error || TextBlock.Text == new_new_ch) //запрещаем умножать на строки
             {
                 AllStr.Text = "";
                 TextBlock.Text = "";
             }
             if (TextBlock.Text != "")
             {
-                if (ch != TextBlock.Text[len - 1] && AllStr.Text.IndexOf(new_ch) == -1)
+                if (ch != TextBlock.Text[len - 1] && AllStr.Text.IndexOf(new_ch) == -1) // проверяем чтобы не было например 8. а былоа 8.6 например
                 {
                     secont_str = TextBlock.Text;
                     AllStr.Text += secont_str + "*";
                     TextBlock.Text = "";
                 }
-                else if (ch != TextBlock.Text[len - 1] && AllStr.Text.IndexOf(new_ch) != -1)
+                else if (ch != TextBlock.Text[len - 1] && AllStr.Text.IndexOf(new_ch) != -1) // не знаю что я тут на писал и зачем. Но удолять не буду
                 {
                     AllStr.Text = TextBlock.Text + "*";
                     TextBlock.Text = "";
@@ -148,7 +148,7 @@ namespace Calculator
         }
         private void Button_Click_On_Plus(object sender, RoutedEventArgs e) //+
         {
-            string new_new_ch = "∞";
+          //  string new_new_ch = "∞";
             string zero = "Деление на 0 невозможно";
             string error = "Не число";
             if (TextBlock.Text == zero || TextBlock.Text == error)
@@ -212,14 +212,18 @@ namespace Calculator
                 TextBlock.Text = "";
             }
         }
-        private void Button_Click_On_C(object sender, RoutedEventArgs e) // c
+        private void Button_Click_On_C(object sender, RoutedEventArgs e) // c  Просто всё удаляем
         {
             TextBlock.Text = "";
             AllStr.Text = "";
         }
+        private void Button_Click_On_CE(object sender, RoutedEventArgs e) // CE – сокращение от англ. «Clean Entry» — «очистить запись»
+        {
+            TextBlock.Text = "";
+        }
         private void Button_Click_On_Comma(object sender, RoutedEventArgs e) // ,
         {
-            string new_new_ch = "∞";
+           // string new_new_ch = "∞";
             string zero = "Деление на 0 невозможно";
             string error = "Не число";
             if (TextBlock.Text == zero || TextBlock.Text == error)
@@ -231,7 +235,7 @@ namespace Calculator
             char ch = '.';
             int len = TextBlock.Text.Length;
             int count = 0;
-            for (int i = 0; i < TextBlock.Text.Length; i++)
+            for (int i = 0; i < TextBlock.Text.Length; i++) // ищем сколько . в тексте
             {
                 if (TextBlock.Text[i] == ch)
                 {
@@ -241,7 +245,7 @@ namespace Calculator
 
             if (TextBlock.Text != "")
             {
-                if (TextBlock.Text[len - 1] != ch && count == 0)
+                if (TextBlock.Text[len - 1] != ch && count == 0) // точку можно добавть, если её нет ещё, а дальше вообще её ставить нельзя
                 {
                     TextBlock.Text = TextBlock.Text + ch;
                 }
@@ -269,7 +273,7 @@ namespace Calculator
             string new_str;
             if (len != 0)
             {
-                new_str = str.Substring(0, len - 1);
+                new_str = str.Substring(0, len - 1); // уменьщаем длину на едениец прикаждом нажати DEL
             }
             else
             {
@@ -289,7 +293,7 @@ namespace Calculator
             if (TextBlock.Text != "")
             {
                 string asd = TextBlock.Text;
-                asd = asd.Replace('.',',');
+                asd = asd.Replace('.',','); // с . не работало 
                 double qwe = Double.Parse(asd);
                 qwe = qwe * -1;
                 string zxc = qwe.ToString();
@@ -302,7 +306,7 @@ namespace Calculator
                 TextBlock.Text = TextBlock.Text;
             }
         }
-        private double Pow(double x)
+        private double Pow(double x) // возводим в x^2
         {
             return Math.Pow(x, 2);
         }
@@ -341,7 +345,7 @@ namespace Calculator
             }
             if (TextBlock.Text != "")
             {
-                if (TextBlock.Text[0] != '-')
+                if (TextBlock.Text[0] != '-') // проверка на извелчение отрицательного числа из под корня
                 {
                     string asd = TextBlock.Text;
                     asd = asd.Replace('.', ',');
@@ -395,7 +399,7 @@ namespace Calculator
             {
 
                 case "1":
-                    if (TextBlock.Text == zero || TextBlock.Text == error)
+                    if (TextBlock.Text == zero || TextBlock.Text == error) // провекри на содержание в TextBlock.Text
                     {
                         AllStr.Text = "";
                         TextBlock.Text = "";

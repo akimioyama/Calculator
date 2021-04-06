@@ -103,5 +103,11 @@
   <ItemGroup>
     <Resource Include="DEEL.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon1.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
